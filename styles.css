@@ -1,0 +1,107 @@
+/* Gramps Web plugin styles. Colors use Obsidian's theme CSS variables so
+   the plugin follows the active light/dark theme automatically. */
+
+.gramps-web-card {
+	display: flex;
+	gap: 0.75em;
+	align-items: flex-start;
+	padding: 0.75em;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	background-color: var(--background-secondary);
+}
+
+.gramps-web-card-thumb {
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+	border-radius: var(--radius-s);
+	flex-shrink: 0;
+}
+
+.gramps-web-card-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2em;
+	min-width: 0;
+}
+
+.gramps-web-card-title {
+	font-weight: var(--font-weight-bold, 600);
+	color: var(--text-normal);
+	text-decoration: none;
+}
+
+.gramps-web-card-title:hover {
+	color: var(--text-accent-hover);
+	text-decoration: underline;
+}
+
+.gramps-web-card-id,
+.gramps-web-card-dates {
+	color: var(--text-muted);
+	font-size: var(--font-smallest);
+}
+
+.gramps-web-card-note-preview {
+	color: var(--text-muted);
+	font-size: var(--font-small);
+	white-space: pre-wrap;
+}
+
+.gramps-web-card-error {
+	color: var(--text-error);
+	font-size: var(--font-small);
+	padding: 0.5em;
+	border: 1px solid var(--background-modifier-error);
+	border-radius: var(--radius-m);
+}
+
+.popover.hover-popover.gramps-web-hover-card {
+	width: auto;
+	max-width: 360px;
+	min-height: 0;
+	max-height: none;
+	padding: 0;
+}
+
+.gramps-web-hover-card .gramps-web-card {
+	border: none;
+}
+
+.gramps-web-card img.gramps-web-card-thumb {
+	width: 64px;
+	max-width: none;
+	height: 64px;
+}
+
+.gramps-web-note-embed {
+	padding: 0.75em;
+	border-left: 3px solid var(--interactive-accent);
+	background-color: var(--background-secondary);
+	border-radius: var(--radius-s);
+}
+
+.gramps-web-suggestion-title {
+	color: var(--text-normal);
+}
+
+.gramps-web-suggestion-type {
+	color: var(--text-muted);
+	font-size: var(--font-smallest);
+	text-transform: capitalize;
+}
+
+.gramps-web-search-filter {
+	padding: 0 var(--size-4-2);
+	min-height: 0;
+}
+
+.gramps-web-filter-chip {
+	display: inline-block;
+	padding: 0.1em 0.6em;
+	border-radius: var(--radius-s);
+	background-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+	font-size: var(--font-smallest);
+}
