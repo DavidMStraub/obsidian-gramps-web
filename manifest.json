@@ -1,7 +1,7 @@
 {
 	"id": "gramps-web",
 	"name": "Gramps Web",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minAppVersion": "1.11.4",
 	"description": "Link your notes to people, families, events, places and sources in a Gramps Web genealogy server.",
 	"author": "David Straub",
