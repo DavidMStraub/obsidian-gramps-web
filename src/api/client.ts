@@ -105,14 +105,25 @@ export class GrampsClient {
 		return this.tokens.hasRefreshToken();
 	}
 
-	private async refreshAccessToken(): Promise<boolean> {
-		if (!this.tokens.getRefreshToken()) return false;
-		try {
-			await this.doRefresh();
-			return true;
-		} catch {
-			return false;
+	// The server rate-limits token refresh to 1/second, so concurrent
+	// requests with an expired token must share a single refresh
+	private pendingRefresh?: Promise<boolean>;
+
+	private refreshAccessToken(): Promise<boolean> {
+		if (!this.pendingRefresh) {
+			this.pendingRefresh = (async () => {
+				if (!this.tokens.getRefreshToken()) return false;
+				try {
+					await this.doRefresh();
+					return true;
+				} catch {
+					return false;
+				}
+			})().finally(() => {
+				this.pendingRefresh = undefined;
+			});
 		}
+		return this.pendingRefresh;
 	}
 
 	/** Low-level request: no auth handling, throws GrampsApiError('offline') on network failure. */
@@ -225,7 +236,10 @@ export class GrampsClient {
 			return await this.rawRequest(path, opts, accessToken ?? undefined);
 		} catch (e) {
 			if (e instanceof GrampsApiError && e.kind === 'auth') {
-				const refreshed = await this.refreshAccessToken();
+				// another request may have refreshed the token in the meantime
+				const refreshed =
+					this.tokens.getAccessToken() !== accessToken ||
+					(await this.refreshAccessToken());
 				if (refreshed) {
 					const retryToken = this.tokens.getAccessToken();
 					return this.rawRequest(path, opts, retryToken ?? undefined);
