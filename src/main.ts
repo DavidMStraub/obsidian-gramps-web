@@ -40,14 +40,7 @@ export default class GrampsWebPlugin extends Plugin {
 		registerHoverCard(this);
 		registerGrampsCodeBlock(this);
 
-		if (this.settings.inlineTriggerEnabled) {
-			this.registerEditorSuggest(new GrampsInlineSuggest(this.app, this));
-		}
-	}
-
-	onunload(): void {
-		// All listeners/extensions were registered via this.register* helpers
-		// and are cleaned up automatically.
+		this.registerEditorSuggest(new GrampsInlineSuggest(this.app, this));
 	}
 
 	async loadSettings(): Promise<void> {

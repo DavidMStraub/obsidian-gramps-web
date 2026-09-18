@@ -39,6 +39,8 @@ export class GrampsInlineSuggest extends EditorSuggest<SearchHit> {
 		editor: Editor,
 		_file: TFile | null,
 	): EditorSuggestTriggerInfo | null {
+		// Registered always, so that changing the setting needs no reload
+		if (!this.plugin.settings.inlineTriggerEnabled) return null;
 		const trigger = this.plugin.settings.inlineTriggerString;
 		if (!trigger) return null;
 		const lineText = editor.getLine(cursor.line).slice(0, cursor.ch);

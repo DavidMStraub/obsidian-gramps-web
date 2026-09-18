@@ -151,7 +151,7 @@ export class GrampsWebSettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName('Enable inline link trigger')
 			.setDesc(
-				'Type the trigger string to search and insert a Gramps link while typing, without a command. Disabled by default to avoid hijacking keystrokes. Requires reloading the plugin after changing.',
+				'Type the trigger string to search and insert a Gramps link while typing, without a command. Disabled by default to avoid hijacking keystrokes.',
 			)
 			.addToggle((toggle) =>
 				toggle
@@ -166,7 +166,7 @@ export class GrampsWebSettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName('Inline trigger string')
 			.setDesc(
-				'Text that triggers the inline suggester (default "@@"). Avoid a single "@", which clashes with the Natural Language Dates and At People plugins; avoid "*" and "+", used for birth/death marks. Requires reloading the plugin after changing.',
+				'Text that triggers the inline suggester (default "@@"). Avoid a single "@", which clashes with the Natural Language Dates and At People plugins; avoid "*" and "+", used for birth/death marks.',
 			)
 			.addText((text) =>
 				text
