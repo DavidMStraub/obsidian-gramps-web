@@ -30,6 +30,10 @@ The plugin only talks to the Gramps Web server you configure. It sends search te
 
 Requires Obsidian 1.11.4 or later. Works on desktop and mobile.
 
+## Support
+
+If you find this plugin useful, consider [sponsoring me on GitHub](https://github.com/sponsors/DavidMStraub).
+
 ## Development
 
 ```bash
