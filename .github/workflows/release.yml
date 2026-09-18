@@ -1,9 +1,11 @@
 name: Release Obsidian plugin
 
+# Builds the plugin and attaches main.js, manifest.json and styles.css to a
+# release created manually on GitHub. Tag the release with the exact version
+# from manifest.json, without a leading "v".
 on:
-    push:
-        tags:
-            - '*'
+    release:
+        types: [published]
 
 jobs:
     build:
@@ -14,6 +16,16 @@ jobs:
             attestations: write
         steps:
             - uses: actions/checkout@v6
+
+            - name: Check tag matches manifest version
+              env:
+                  TAG: ${{ github.event.release.tag_name }}
+              run: |
+                  version=$(jq -r .version manifest.json)
+                  if [ "$TAG" != "$version" ]; then
+                    echo "::error::Release tag '$TAG' does not match manifest.json version '$version'"
+                    exit 1
+                  fi
 
             - name: Use Node.js
               uses: actions/setup-node@v6
@@ -38,13 +50,10 @@ jobs:
                       main.js
                       ${{ steps.styles.outputs.exists == 'true' && 'styles.css' || '' }}
 
-            - name: Create release
+            - name: Upload release assets
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  TAG: ${{ github.event.release.tag_name }}
               run: |
-                  tag="${GITHUB_REF#refs/tags/}"
-
-                  gh release create "$tag" \
-                    --title="$tag" \
-                    --draft \
+                  gh release upload "$TAG" --clobber \
                     main.js manifest.json ${{ steps.styles.outputs.exists == 'true' && 'styles.css' || '' }}
