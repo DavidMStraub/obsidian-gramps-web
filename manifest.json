@@ -5,5 +5,7 @@
 	"minAppVersion": "1.11.4",
 	"description": "Link your notes to people, families, events, places and sources in a Gramps Web genealogy server.",
 	"author": "David Straub",
+	"authorUrl": "https://github.com/DavidMStraub",
+	"fundingUrl": "https://github.com/sponsors/DavidMStraub",
 	"isDesktopOnly": false
 }
