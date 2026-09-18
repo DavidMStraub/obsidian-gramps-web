@@ -284,6 +284,12 @@ export class GrampsClient {
 		return res.json as SearchHit[];
 	}
 
+	/** Makes links in note HTML point to the Gramps Web frontend, like Gramps Web itself does. */
+	private formatOptions(formats: string[] | undefined): string | undefined {
+		if (!formats?.includes('html')) return undefined;
+		return JSON.stringify({ link_format: `${this.baseUrl}/{obj_class}/{gramps_id}` });
+	}
+
 	async getObjectByHandle(
 		type: GrampsObjectType,
 		handle: string,
@@ -293,6 +299,7 @@ export class GrampsClient {
 			query: {
 				profile: opts.profile?.join(','),
 				formats: opts.formats?.join(','),
+				format_options: this.formatOptions(opts.formats),
 				locale: this.options.locale,
 			},
 		});
@@ -309,6 +316,7 @@ export class GrampsClient {
 				gramps_id: grampsId,
 				profile: opts.profile?.join(','),
 				formats: opts.formats?.join(','),
+				format_options: this.formatOptions(opts.formats),
 				locale: this.options.locale,
 			},
 		});

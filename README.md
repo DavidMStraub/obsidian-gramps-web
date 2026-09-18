@@ -22,6 +22,8 @@ Link your Obsidian notes to people, families, events, sources and notes in a [Gr
 1. In **Settings → Gramps Web**, enter your server URL and username.
 2. Enter your password and select **Sign in**, then select **Test connection** to check that it works.
 
+The plugin assumes the Gramps Web app and its API are served from the same URL, which is the default setup.
+
 ## Privacy
 
 The plugin only talks to the Gramps Web server you configure. It sends search terms and the IDs of the objects it looks up. It never sends note contents or file names, and it has no analytics. Your password is not stored. The login tokens are kept in Obsidian's secret storage on this device and are not synced.

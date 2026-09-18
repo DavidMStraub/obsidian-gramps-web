@@ -82,9 +82,7 @@ function renderNoteEmbed(el: HTMLElement, obj: GrampsObject): void {
 	el.addClass('gramps-web-note-embed');
 	const html = obj.formatted?.html;
 	if (html) {
-		// The note's own gramps:// links (Gramps uses the same URI scheme)
-		// keep working as-is: the plugin's global link click handler matches
-		// any `a[href^="gramps://"]`, wherever it is in the DOM.
+		// Links point to the Gramps Web frontend (see GrampsClient.formatOptions)
 		el.appendChild(sanitizeHTMLToDom(html));
 	} else if (obj.text?.string) {
 		el.setText(obj.text.string);

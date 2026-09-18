@@ -38,10 +38,10 @@ export class GrampsWebSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Server URL')
-			.setDesc('The base URL of your Gramps Web server, e.g. https://gramps.example.com.')
+			.setDesc('The base URL of your Gramps Web server, e.g. https://grampshub.com.')
 			.addText((text) =>
 				text
-					.setPlaceholder('https://gramps.example.com')
+					.setPlaceholder('https://grampshub.com')
 					.setValue(this.plugin.settings.serverUrl)
 					.onChange(async (value) => {
 						this.plugin.settings.serverUrl = value;
