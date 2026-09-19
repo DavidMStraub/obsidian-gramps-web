@@ -9,6 +9,7 @@ npm install
 npm run dev     # watch build
 npm run build   # type-check + production build
 npm run lint
+npm test        # unit tests (vitest) for pure logic; files next to modules as *.test.ts
 ```
 
 Test by symlinking the repo to `<vault>/.obsidian/plugins/gramps-web/`.
